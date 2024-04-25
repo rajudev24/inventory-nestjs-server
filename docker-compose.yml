@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  nestjs-app:
+    build: .
+    ports:
+      - '5000:5000'
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URI: 'mongodb+srv://test-db:K0ULKfyKDZ23WfEM@cluster0.qhwuq.mongodb.net/test-db?retryWrites=true&w=majority'
+
+  mongo:
+    build:
+      context: ./mongodb
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
